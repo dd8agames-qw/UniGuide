@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Texas Colleges & Universities</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+  <div class="map-key" style="position: absolute; top: 24px; right: 32px; z-index: 10;">
+    <span style="color: #43ea7f; font-size: 1.2em; font-weight: bold;">&#x2BC8;</span> Campus map available<br>
+    <span style="color: #e11528; font-size: 1.2em; font-weight: bold;">*</span> Campus map not available
+  </div>
+  <div class="container" id="main-container">
+    <h1>Select Your Texas College or University</h1>
+    <form id="collegeForm">
+      <div class="select-wrapper">
+        <select id="universitySelect" required>
+          <option value="" disabled selected>Select a university...</option>
+        </select>
+      </div>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+  <script src="/public/app.js"></script>
+</body>
+</html>

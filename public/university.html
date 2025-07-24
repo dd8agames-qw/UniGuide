@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selected University</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+  <div class="container" id="university-container">
+    <h1 id="university-name"></h1>
+    <p id="university-theme-info"></p>
+    <a href="/public/index.html" class="submit-btn">Back</a>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    fetch('/public/universities.json')
+      .then(res => res.json())
+      .then(data => {
+        const uni = data.find(u => u.name === name);
+        if (uni) {
+          document.getElementById('university-name').textContent = uni.name;
+          document.getElementById('university-theme-info').textContent = `Theme color: ${uni.theme}`;
+          document.getElementById('university-container').style.borderColor = uni.theme;
+          document.getElementById('university-container').style.boxShadow = `0 0 12px ${uni.theme}33`;
+        } else {
+          document.getElementById('university-name').textContent = 'University not found.';
+        }
+      });
+  </script>
+</body>
+</html>

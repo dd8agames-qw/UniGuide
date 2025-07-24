@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Login</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+  <div class="container" id="login-container">
+    <h1 id="login-university-name">Login</h1>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required>
+      </div>
+      <div class="form-group">
+        <label for="middleName">Middle Name</label>
+        <input type="text" id="middleName" name="middleName">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" required>
+      </div>
+      <div class="form-group">
+        <label for="studentId">Student ID</label>
+        <input type="text" id="studentId" name="studentId" required>
+      </div>
+      <div class="form-group">
+        <label for="placeOfBirth">Place of Birth</label>
+        <input type="text" id="placeOfBirth" name="placeOfBirth" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div style="display: flex; gap: 24px; justify-content: center; margin-top: 12px;">
+        <button type="submit" class="submit-btn">Login</button>
+        <a href="/public/index.html" class="submit-btn">Back</a>
+      </div>
+    </form>
+  </div>
+  <script src="/public/login.js"></script>
+</body>
+</html>

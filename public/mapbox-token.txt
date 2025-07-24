@@ -1,0 +1,1 @@
+Paste your Mapbox access token here. Get one at https://account.mapbox.com/access-tokens/

@@ -1,0 +1,17 @@
+[
+  {"name": "University of Texas at Austin", "theme": "#bf5700"},
+  {"name": "Texas A&M University", "theme": "#500000"},
+  {"name": "Rice University", "theme": "#00205b"},
+  {"name": "Texas Tech University", "theme": "#cc0000"},
+  {"name": "University of Houston", "theme": "#e11528"},
+  {"name": "Southern Methodist University", "theme": "#e41b17"},
+  {"name": "Baylor University", "theme": "#154734"},
+  {"name": "Texas State University", "theme": "#500000"},
+  {"name": "University of North Texas", "theme": "#00853e"},
+  {"name": "Texas Christian University", "theme": "#4d1979"},
+  {"name": "Sam Houston State University", "theme": "#f47c20"},
+  {"name": "Lamar University", "theme": "#e41b17"},
+  {"name": "Stephen F. Austin State University", "theme": "#4f2e7a"},
+  {"name": "Angelo State University", "theme": "#003087"},
+  {"name": "Prairie View A&M University", "theme": "#330066"}
+]
