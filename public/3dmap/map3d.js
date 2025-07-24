@@ -31,32 +31,26 @@ const campusData = {
 const cesiumContainer = document.getElementById('cesiumContainer');
 if (cesiumContainer && campusData[name]) {
   Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YWQ3Y2RmYS1hMzA2LTQ1Y2QtYjk3OC1kOTZmNGNhY2Y5OTYiLCJpZCI6MzI0ODUxLCJpYXQiOjE3NTMzNzUxMjB9.T7AP3Fvj0lhU0SIB3fVG2oTKc_QGfw1ujqvyWmfGpBY';
-  let terrainProvider;
-  if (typeof Cesium.createWorldTerrain === 'function') {
-    terrainProvider = Cesium.createWorldTerrain();
-  } else if (Cesium.WorldTerrain) {
-    terrainProvider = Cesium.WorldTerrain;
-  } else {
-    terrainProvider = undefined;
-  }
   const viewer = new Cesium.Viewer('cesiumContainer', {
-    terrainProvider: terrainProvider,
-    animation: false,
-    timeline: false,
     baseLayerPicker: false,
     geocoder: false,
     homeButton: false,
-    sceneModePicker: true,
     navigationHelpButton: true,
+    sceneModePicker: true,
+    animation: false,
+    timeline: false,
     infoBox: false,
     fullscreenButton: true
   });
-  viewer.scene.globe.enableLighting = true;
+
+  // Set initial camera view to campus in 3D
+  const center = campusData[name].center;
   viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(
-      campusData[name].center[1],
-      campusData[name].center[0],
-      2000
-    )
+    destination: Cesium.Cartesian3.fromDegrees(center[1], center[0], 1200),
+    orientation: {
+      heading: Cesium.Math.toRadians(0),
+      pitch: Cesium.Math.toRadians(-45),
+      roll: 0.0
+    }
   });
 }
