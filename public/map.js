@@ -155,6 +155,34 @@ if (mapDiv) {
       const marker = L.marker(b.coords).addTo(map);
       marker.bindPopup(`<div class='bubble'><strong>${b.name}</strong><br>${b.info}</div>`);
     });
+
+    // Add a deep red square outline for the campus
+    // Define bounds for each campus (approximate)
+    const campusBounds = {
+      "University of Texas at Austin": [[30.282, -97.742], [30.288, -97.732]],
+      "Texas A&M University": [[30.612, -96.344], [30.618, -96.338]],
+      "Rice University": [[29.715, -95.401], [29.721, -95.395]],
+      "Texas Tech University": [[33.582, -101.882], [33.588, -101.874]],
+      "University of Houston": [[29.717, -95.347], [29.723, -95.339]],
+      "Southern Methodist University": [[32.840, -96.787], [32.845, -96.782]],
+      "Baylor University": [[31.547, -97.117], [31.552, -97.112]],
+      "University of North Texas": [[33.208, -97.153], [33.213, -97.148]],
+      "Texas State University": [[29.886, -97.941], [29.891, -97.936]],
+      "Sam Houston State University": [[30.711, -95.553], [30.716, -95.548]],
+      "Lamar University": [[30.040, -94.074], [30.045, -94.069]],
+      "Stephen F. Austin State University": [[31.615, -94.654], [31.620, -94.649]],
+      "Angelo State University": [[31.440, -100.464], [31.445, -100.459]],
+      "Prairie View A&M University": [[30.087, -95.993], [30.092, -95.988]]
+    };
+    if (campusBounds[name]) {
+      L.rectangle(campusBounds[name], {
+        color: '#b20000',
+        weight: 4,
+        fill: false,
+        dashArray: '8',
+        opacity: 0.9
+      }).addTo(map);
+    }
   } else {
     map = L.map('map').setView([31.0, -99.0], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

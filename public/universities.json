@@ -13,5 +13,19 @@
   {"name": "Lamar University", "theme": "#e41b17"},
   {"name": "Stephen F. Austin State University", "theme": "#4f2e7a"},
   {"name": "Angelo State University", "theme": "#003087"},
-  {"name": "Prairie View A&M University", "theme": "#330066"}
+  {"name": "Prairie View A&M University", "theme": "#330066"},
+  {"name": "University of Texas at Dallas", "theme": "#006699"},
+  {"name": "Texas Woman's University", "theme": "#c8102e"},
+  {"name": "University of Texas at San Antonio", "theme": "#f15a22"},
+  {"name": "University of Texas at El Paso", "theme": "#ff8200"},
+  {"name": "Texas Southern University", "theme": "#4b2e83"},
+  {"name": "Midwestern State University", "theme": "#e4002b"},
+  {"name": "Tarleton State University", "theme": "#663399"},
+  {"name": "Texas A&M International University", "theme": "#800000"},
+  {"name": "Texas A&M University–Commerce", "theme": "#003366"},
+  {"name": "Texas A&M University–Corpus Christi", "theme": "#007681"},
+  {"name": "Texas A&M University–Kingsville", "theme": "#003366"},
+  {"name": "Texas A&M University–Texarkana", "theme": "#003366"},
+  {"name": "West Texas A&M University", "theme": "#800000"},
+  {"name": "University of Texas Rio Grande Valley", "theme": "#f15a22"}
 ]
