@@ -1,6 +1,6 @@
 // 3D Map logic using CSS 3D transforms (fallback when CesiumJS isn't available)
 const params = new URLSearchParams(window.location.search);
-const name = params.get('name');
+const name = params.get('name') || 'University of Houston';
 
 let currentZoom = 1;
 let currentRotationX = 0;
