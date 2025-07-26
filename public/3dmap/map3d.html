@@ -20,16 +20,47 @@
     
     .campus-building {
       position: absolute;
-      background: #666;
-      border: 1px solid #444;
+      background: linear-gradient(135deg, #666 0%, #555 50%, #444 100%);
+      border: 2px solid #333;
       transform-style: preserve-3d;
       transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+    
+    .campus-building::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, rgba(255,255,255,0.3) 0%, transparent 50%, rgba(0,0,0,0.2) 100%);
+      border-radius: 2px;
+      z-index: -1;
+    }
+    
+    .campus-building::after {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      right: 10%;
+      height: 15%;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(200,200,255,0.1) 0px,
+        rgba(200,200,255,0.1) 8px,
+        transparent 8px,
+        transparent 12px
+      );
+      border-radius: 1px;
     }
     
     .campus-building:hover {
-      background: #888;
-      transform: scale(1.1);
+      background: linear-gradient(135deg, #888 0%, #777 50%, #666 100%);
+      transform: scale(1.05) translateZ(10px);
       z-index: 10;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
     }
     
     .building-label {

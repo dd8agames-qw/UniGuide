@@ -1,6 +1,6 @@
 // 3D Map logic using CSS 3D transforms (fallback when CesiumJS isn't available)
 const params = new URLSearchParams(window.location.search);
-const name = params.get('name') || 'University of Houston';
+const name = params.get('name') === 'null' || !params.get('name') ? 'University of Houston' : params.get('name');
 
 let currentZoom = 1;
 let currentRotationX = 0;
@@ -77,6 +77,29 @@ const campusData = {
   }
 };
 
+// Helper functions for color manipulation
+function lightenColor(color, percent) {
+  const num = parseInt(color.replace('#', ''), 16);
+  const amt = Math.round(2.55 * percent);
+  const R = (num >> 16) + amt;
+  const G = (num >> 8 & 0x00FF) + amt;
+  const B = (num & 0x0000FF) + amt;
+  return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+    (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+    (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+}
+
+function darkenColor(color, percent) {
+  const num = parseInt(color.replace('#', ''), 16);
+  const amt = Math.round(2.55 * percent);
+  const R = (num >> 16) - amt;
+  const G = (num >> 8 & 0x00FF) - amt;
+  const B = (num & 0x0000FF) - amt;
+  return '#' + (0x1000000 + (R > 255 ? 255 : R < 0 ? 0 : R) * 0x10000 +
+    (G > 255 ? 255 : G < 0 ? 0 : G) * 0x100 +
+    (B > 255 ? 255 : B < 0 ? 0 : B)).toString(16).slice(1);
+}
+
 // Initialize university theme and data
 fetch('/public/universities.json')
   .then(res => res.json())
@@ -112,13 +135,22 @@ function create3DCampus() {
     buildingElement.style.top = `${building.y}%`;
     buildingElement.style.width = `${building.width}px`;
     buildingElement.style.height = `${building.height}px`;
-    buildingElement.style.backgroundColor = building.color;
+    
+    // Enhanced building color with gradient
+    const baseColor = building.color;
+    const lightColor = lightenColor(baseColor, 20);
+    const darkColor = darkenColor(baseColor, 20);
+    buildingElement.style.background = `linear-gradient(135deg, ${lightColor} 0%, ${baseColor} 50%, ${darkColor} 100%)`;
     buildingElement.style.zIndex = Math.floor(building.height / 10);
     
-    // Add 3D effect
+    // Enhanced 3D effect with multiple shadows for depth
+    const shadowDepth = Math.max(building.height / 8, 4);
     buildingElement.style.boxShadow = `
-      ${building.height / 4}px ${building.height / 4}px 0 rgba(0,0,0,0.3),
-      ${building.height / 2}px ${building.height / 2}px 0 rgba(0,0,0,0.1)
+      ${shadowDepth}px ${shadowDepth}px 0 ${darkColor},
+      ${shadowDepth * 1.5}px ${shadowDepth * 1.5}px 0 rgba(0,0,0,0.4),
+      ${shadowDepth * 2}px ${shadowDepth * 2}px ${shadowDepth}px rgba(0,0,0,0.2),
+      inset 2px 2px 4px rgba(255,255,255,0.3),
+      inset -2px -2px 4px rgba(0,0,0,0.3)
     `;
     
     // Add building label
@@ -158,9 +190,11 @@ function addCampusPaths(container) {
     pathElement.style.top = `${path.y}%`;
     pathElement.style.width = path.width;
     pathElement.style.height = path.height;
-    pathElement.style.backgroundColor = '#888';
-    pathElement.style.opacity = '0.6';
+    pathElement.style.background = 'linear-gradient(90deg, #666 0%, #777 50%, #666 100%)';
+    pathElement.style.border = '1px solid #555';
+    pathElement.style.opacity = '0.8';
     pathElement.style.zIndex = '1';
+    pathElement.style.boxShadow = 'inset 0 1px 2px rgba(0,0,0,0.3), 0 1px 2px rgba(255,255,255,0.1)';
     container.appendChild(pathElement);
   });
 }
