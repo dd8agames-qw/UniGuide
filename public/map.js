@@ -85,60 +85,6 @@ const campusData = {
       { name: "Willis Library", coords: [33.2107, -97.1487], info: "Professors: Dr. Bailey<br>Clubs: Book Club, Study Group" },
       { name: "Apogee Stadium", coords: [33.2075, -97.1527], info: "Professors: Dr. Cooper<br>Clubs: Sports, Tailgating" }
     ]
-  },
-  "Texas State University": {
-    center: [29.8883, -97.9384],
-    zoom: 16,
-    buildings: [
-      { name: "Alkek Library", coords: [29.8891, -97.9436], info: "Professors: Dr. Hill<br>Clubs: Study Group, Book Club" },
-      { name: "LBJ Student Center", coords: [29.8883, -97.9384], info: "Professors: Dr. Adams<br>Clubs: Student Government, Events" },
-      { name: "Strahan Arena", coords: [29.8902, -97.9367], info: "Professors: Dr. Carter<br>Clubs: Sports, Basketball" }
-    ]
-  },
-  "Sam Houston State University": {
-    center: [30.7131, -95.5508],
-    zoom: 16,
-    buildings: [
-      { name: "Newton Gresham Library", coords: [30.7131, -95.5508], info: "Professors: Dr. Lee<br>Clubs: Study Group, Book Club" },
-      { name: "Lowman Student Center", coords: [30.7135, -95.5487], info: "Professors: Dr. White<br>Clubs: Student Government, Events" },
-      { name: "Bowers Stadium", coords: [30.7152, -95.5472], info: "Professors: Dr. Green<br>Clubs: Sports, Football" }
-    ]
-  },
-  "Lamar University": {
-    center: [30.0419, -94.0721],
-    zoom: 16,
-    buildings: [
-      { name: "Mary and John Gray Library", coords: [30.0419, -94.0721], info: "Professors: Dr. Black<br>Clubs: Study Group, Book Club" },
-      { name: "Setzer Student Center", coords: [30.0425, -94.0707], info: "Professors: Dr. Brown<br>Clubs: Student Government, Events" },
-      { name: "Provost Umphrey Stadium", coords: [30.0437, -94.0702], info: "Professors: Dr. Blue<br>Clubs: Sports, Football" }
-    ]
-  },
-  "Stephen F. Austin State University": {
-    center: [31.6176, -94.6514],
-    zoom: 16,
-    buildings: [
-      { name: "Ralph W. Steen Library", coords: [31.6176, -94.6514], info: "Professors: Dr. Smith<br>Clubs: Study Group, Book Club" },
-      { name: "Baker Pattillo Student Center", coords: [31.6179, -94.6492], info: "Professors: Dr. Johnson<br>Clubs: Student Government, Events" },
-      { name: "Homer Bryce Stadium", coords: [31.6192, -94.6481], info: "Professors: Dr. Williams<br>Clubs: Sports, Football" }
-    ]
-  },
-  "Angelo State University": {
-    center: [31.4424, -100.4616],
-    zoom: 16,
-    buildings: [
-      { name: "Porter Henderson Library", coords: [31.4424, -100.4616], info: "Professors: Dr. Martinez<br>Clubs: Study Group, Book Club" },
-      { name: "Houston Harte University Center", coords: [31.4431, -100.4602], info: "Professors: Dr. Robinson<br>Clubs: Student Government, Events" },
-      { name: "LeGrand Stadium", coords: [31.4442, -100.4591], info: "Professors: Dr. Clark<br>Clubs: Sports, Football" }
-    ]
-  },
-  "Prairie View A&M University": {
-    center: [30.0891, -95.9905],
-    zoom: 16,
-    buildings: [
-      { name: "John B. Coleman Library", coords: [30.0891, -95.9905], info: "Professors: Dr. Lewis<br>Clubs: Study Group, Book Club" },
-      { name: "Memorial Student Center", coords: [30.0897, -95.9887], info: "Professors: Dr. Walker<br>Clubs: Student Government, Events" },
-      { name: "Panther Stadium", coords: [30.0908, -95.9872], info: "Professors: Dr. Hall<br>Clubs: Sports, Football" }
-    ]
   }
 };
 

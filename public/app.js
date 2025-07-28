@@ -13,11 +13,14 @@ fetch('/public/universities.json')
       "Baylor University",
       "University of North Texas"
     ];
+    // Remove duplicates by name
+    const seen = new Set();
     data.forEach(u => {
+      if (seen.has(u.name)) return;
+      seen.add(u.name);
       const option = document.createElement('option');
       option.value = u.name;
       const hasMap = mapAvailable.includes(u.name);
-      // Green grave: U+2BC8, Red asterisk: *
       option.innerHTML = hasMap
         ? `<span style='color:#43ea7f;'>&#x2BC8;</span> ${u.name}`
         : `<span style='color:#e11528;'>*</span> ${u.name}`;

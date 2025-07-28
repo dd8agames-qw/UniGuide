@@ -23,7 +23,7 @@
     <div id="map"></div>
     <div style="margin-top:24px;">
       <a id="to3dmap" class="submit-btn" style="margin-right:16px;">Switch to 3D Map</a>
-      <a href="/public/index.html" class="submit-btn" style="display:inline-block;">Back</a>
+      <a id="toindex" href="/public/index.html" class="submit-btn" style="display:inline-block;">Back</a>
     </div>
   </div>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -35,6 +35,13 @@
       const name = params.get('name');
       document.getElementById('to3dmap').addEventListener('click', function() {
         window.location.href = `/public/3dmap/map3d.html?name=${encodeURIComponent(name)}`;
+      });
+      // Ensure going back to index preserves the selected university (optional, can be removed if not needed)
+      document.getElementById('toindex').addEventListener('click', function(e) {
+        if (name) {
+          e.preventDefault();
+          window.location.href = `/public/index.html?name=${encodeURIComponent(name)}`;
+        }
       });
     });
   </script>
