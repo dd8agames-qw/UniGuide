@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus 3D Map (Mapbox)</title>
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css">
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100vw; height:100vh; }
+    .mapboxgl-ctrl-logo, .mapboxgl-ctrl-attrib { display:none!important; }
+    #campus-controls {
+      position: fixed;
+      top: 24px;
+      right: 32px;
+      z-index: 10;
+      background: rgba(255,255,255,0.95);
+      border-radius: 10px;
+      box-shadow: 0 2px 12px #0002;
+      padding: 12px 18px;
+      min-width: 120px;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div id="campus-controls">
+    <b>Campus 3D Map</b><br>
+    <span style="font-size:0.95em;">Drag, zoom, and tilt for a true 3D view.<br>Buildings are real Mapbox 3D data.</span>
+  </div>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+  <script>
+    mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN_HERE'; // <-- Replace with your token
+    // Default to University of Houston
+    const campusCenters = {
+      'University of Houston': [29.7199, -95.3422],
+      'University of Texas at Austin': [30.285, -97.735],
+      'Texas A&M University': [30.6152, -96.3415],
+      'Rice University': [29.7182, -95.3977],
+      'Texas Tech University': [33.5846, -101.8784],
+      'Southern Methodist University': [32.8423, -96.7846],
+      'Baylor University': [31.5493, -97.1143],
+      'University of North Texas': [33.2101, -97.1503]
+    };
+    // Get campus from query string
+    const params = new URLSearchParams(window.location.search);
+    const campus = params.get('name') || 'University of Houston';
+    const center = campusCenters[campus] || campusCenters['University of Houston'];
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/satellite-streets-v12',
+      center: center,
+      zoom: 16.5,
+      pitch: 60,
+      bearing: -20,
+      antialias: true
+    });
+    // Add navigation controls
+    map.addControl(new mapboxgl.NavigationControl());
+    // Add 3D buildings layer
+    map.on('load', () => {
+      const layers = map.getStyle().layers;
+      let labelLayerId;
+      for (let i = 0; i < layers.length; i++) {
+        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+          labelLayerId = layers[i].id;
+          break;
+        }
+      }
+      map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+          'fill-extrusion-color': '#aaa',
+          'fill-extrusion-height': ['get', 'height'],
+          'fill-extrusion-base': ['get', 'min_height'],
+          'fill-extrusion-opacity': 0.7
+        }
+      }, labelLayerId);
+    });
+    // Optionally, add custom markers for campus POIs
+    // Example: new mapboxgl.Marker().setLngLat(center).addTo(map);
+  </script>
+</body>
+</html>

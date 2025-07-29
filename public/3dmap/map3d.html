@@ -13,14 +13,12 @@
       border-radius: 16px;
       margin-top: 24px;
       display: block;
-      /* Immersive sky-to-ground gradient with subtle texture */
-      background: 
-        radial-gradient(ellipse at 60% 18%, #eaf6ff 60%, #b3d1e6 100%),
-        repeating-linear-gradient(135deg, #eafbe7 0 8px, #eaf6ff 8px 16px),
-        linear-gradient(to bottom, #b3d1e6 0%, #eafbe7 40%, #c6e5c3 100%);
-      background-blend-mode: lighten, normal, normal;
+      /* 3D skybox and ground plane illusion */
+      background: linear-gradient(to top, #b3d1e6 0%, #eafbe7 60%, #eaf6ff 100%);
       position: relative;
       overflow: hidden;
+      perspective: 900px;
+      perspective-origin: 50% 80%;
     }
     
     .campus-building {
@@ -28,8 +26,11 @@
       background: linear-gradient(135deg, #666 0%, #555 50%, #444 100%);
       border: 2px solid #333;
       transform-style: preserve-3d;
-      transition: all 0.3s ease;
-      border-radius: 2px;
+      transition: all 0.3s cubic-bezier(.4,2,.3,1);
+      border-radius: 4px;
+      box-shadow: 0 12px 32px 0 rgba(0,0,0,0.18), 0 2px 8px 0 rgba(0,0,0,0.12);
+      /* 3D extrusion effect */
+      will-change: transform;
     }
     
     .campus-building::before {
@@ -62,10 +63,22 @@
     }
     
     .campus-building:hover {
-      background: linear-gradient(135deg, #888 0%, #777 50%, #666 100%);
-      transform: scale(1.05) translateZ(10px);
-      z-index: 10;
-      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      background: linear-gradient(135deg, #aaa 0%, #888 50%, #666 100%);
+      transform: scale(1.08) translateZ(40px) rotateX(8deg) rotateY(-8deg);
+      z-index: 20;
+      box-shadow: 0 24px 48px 0 rgba(0,0,0,0.28), 0 4px 16px 0 rgba(0,0,0,0.18);
+    }
+    /* 3D ground plane illusion */
+    .ground-plane {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 38%;
+      background: linear-gradient(to top, #b3d1e6 0%, #eafbe7 100%);
+      box-shadow: 0 -8px 32px 0 #b3d1e6cc;
+      z-index: 0;
+      border-radius: 0 0 32px 32px;
+      pointer-events: none;
+      filter: blur(0.5px) brightness(0.98);
     }
     
     .building-label {
@@ -144,6 +157,20 @@
       </div>
       <div class="map-controls">
         <button class="control-btn" onclick="resetView()">Reset View</button>
+      </div>
+      <!-- 3D Map Controls Panel -->
+      <div id="map3d-controls" style="position:fixed;bottom:32px;right:32px;z-index:1000;background:rgba(255,255,255,0.92);border-radius:12px;box-shadow:0 2px 16px #0002;padding:12px 18px;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:90px;">
+        <div style="font-size:1.1em;font-weight:bold;margin-bottom:2px;">Map Controls</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+          <button id="rotate-up" title="Rotate Up" style="font-size:1.3em;">⬆️</button>
+          <div style="display:flex;gap:8px;">
+            <button id="rotate-left" title="Rotate Left" style="font-size:1.3em;">⬅️</button>
+            <button id="reset-view" title="Reset View" style="font-size:1.1em;">⟳</button>
+            <button id="rotate-right" title="Rotate Right" style="font-size:1.3em;">➡️</button>
+          </div>
+          <button id="rotate-down" title="Rotate Down" style="font-size:1.3em;">⬇️</button>
+        </div>
+        <div style="font-size:0.9em;color:#444;margin-top:4px;">Arrow keys also rotate</div>
       </div>
     </div>
     <a id="to2dmap" class="submit-btn" style="margin-top:48px; display:inline-block;">Back to 2D Map</a>
