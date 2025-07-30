@@ -13,7 +13,7 @@
     #campus-controls {
       position: fixed;
       top: 24px;
-      right: 64px;
+      left: 32px;
       z-index: 10;
       background: rgba(255,255,255,0.95);
       border-radius: 10px;
@@ -22,15 +22,179 @@
       min-width: 120px;
       font-size: 1em;
     }
+
+    #chat-bubble {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 56px;
+      height: 56px;
+      background: #4CAF50;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px #0002;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1001;
+      transition: background 0.2s;
+    }
+    #chat-bubble:hover {
+      background: #45a049;
+    }
+    #chat-window {
+      position: fixed;
+      bottom: 100px;
+      right: 32px;
+      width: 320px;
+      max-width: 90vw;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px #0003;
+      z-index: 1002;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #chat-header {
+      background: #4CAF50;
+      color: #fff;
+      padding: 10px 16px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    #chat-messages {
+      padding: 12px 16px;
+      height: 180px;
+      overflow-y: auto;
+      font-size: 1em;
+      background: #f7f7f7;
+    }
+    #chat-input-bar {
+      display: flex;
+      border-top: 1px solid #eee;
+      background: #fafafa;
+      padding: 8px;
+    }
+    #chat-input {
+      flex: 1;
+      border: none;
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 1em;
+      margin-right: 8px;
+      background: #f2f2f2;
+    }
+    #chat-send {
+      background: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #chat-send:hover {
+      background: #45a049;
+    }
   </style>
 </head>
 <body>
   <div id="cesiumContainer"></div>
+  <img src="/public/ug-logo.png" alt="UniGuide Logo" style="position:fixed; bottom:16px; right:16px; width:120px; opacity:0.18; pointer-events:none; background:transparent; z-index:1000;" />
   <div id="campus-controls">
+  <a id="back-to-2d" href="#" style="position:fixed;top:32px;right:32px;z-index:1002;background:#fff;border-radius:8px;padding:8px 18px;box-shadow:0 2px 8px #0002;font-weight:bold;color:#4CAF50;text-decoration:none;">← Back to 2D Map</a>
+  <script>
+    // ...existing code...
+    // Fix back button to preserve selected university
+    document.getElementById('back-to-2d').addEventListener('click', function(e) {
+      e.preventDefault();
+      // Try to get the university name from the current campus variable if available
+      let name = '';
+      if (typeof campus !== 'undefined' && campus) {
+        name = campus;
+      } else {
+        const params = new URLSearchParams(window.location.search);
+        name = params.get('name');
+      }
+      if (name) {
+        window.location.href = `/public/map.html?name=${encodeURIComponent(name)}`;
+      } else {
+        window.location.href = '/public/map.html';
+      }
+    });
+  </script>
     <b>Campus 3D Map</b><br>
     <span style="font-size:0.95em;">Drag, zoom, and tilt for a true 3D view.<br>Buildings and terrain are real CesiumJS data.</span>
   </div>
+  <div id="chat-bubble" title="Chat">
+    <svg width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#fff"/><text x="16" y="21" text-anchor="middle" font-size="18" fill="#4CAF50">💬</text></svg>
+  </div>
+  <div id="chat-window">
+    <div id="chat-header">Chat</div>
+    <div id="chat-messages"></div>
+    <div id="chat-input-bar">
+      <input id="chat-input" type="text" placeholder="Type a message..." />
+      <button id="chat-send">Send</button>
+    </div>
+  </div>
   <script>
+    // Chat bubble and window logic
+    const chatBubble = document.getElementById('chat-bubble');
+    const chatWindow = document.getElementById('chat-window');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
+    const chatMessages = document.getElementById('chat-messages');
+    let chatOpen = false;
+    chatBubble.onclick = function() {
+      chatOpen = !chatOpen;
+      chatWindow.style.display = chatOpen ? 'flex' : 'none';
+      if (chatOpen) chatInput.focus();
+    };
+    chatSend.onclick = sendChatMessage;
+    chatInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') sendChatMessage();
+    });
+    function sendChatMessage() {
+      const msg = chatInput.value.trim();
+      if (!msg) return;
+      appendChatMessage('You', msg);
+      chatInput.value = '';
+      setTimeout(function() {
+        appendChatMessage('Guide', getPresetResponse(msg));
+      }, 5000);
+    }
+    function appendChatMessage(sender, text) {
+      const div = document.createElement('div');
+      div.innerHTML = `<b>${sender}:</b> ${text}`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    function getPresetResponse(userMsg) {
+      const msg = userMsg.toLowerCase();
+      if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
+        return "Hello! Welcome to UniGuide. How can I assist you today?";
+      }
+      if (msg.includes('where') && msg.includes('go')) {
+        return "Let me know which building or area you'd like to visit, and I'll help you find it on the map!";
+      }
+      if (msg.includes('library')) {
+        return "The library is marked on the map. Would you like directions or info about professors and clubs there?";
+      }
+      if (msg.includes('gym')) {
+        return "The gym is highlighted on the campus. You can find fitness and yoga clubs there!";
+      }
+      if (msg.includes('professor') || msg.includes('club')) {
+        return "Click on any building marker to see professors and clubs associated with that location.";
+      }
+      if (msg.includes('thank')) {
+        return "You're welcome! If you have more questions, just ask.";
+      }
+      return "Thanks for your message! How can I help you explore the campus?";
+    }
+    // Set Cesium Ion access token
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmZDAwNGVlZi1mZDk3LTQxYzAtYThkNy04ZThlY2I3YzcxZTIiLCJpZCI6MzI2NzA5LCJpYXQiOjE3NTM5MDU0MzN9.T8yFNy8pH1e6v9pGUEL9r5jqZ53e362l16be7RzqqUo';
 
     // Default to University of Houston
     const campusCenters = {
@@ -59,11 +223,16 @@
       infoBox: false,
       fullscreenButton: true
     });
-    // Add OpenStreetMap imagery for context (CSP safe)
-    viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider());
+    // Explicitly show the globe
+    viewer.scene.globe.show = true;
+    // Add Cesium World Imagery using Ion token
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhZGU4MzAzYy01Yjg2LTQwZTEtYmFlZC1iNjE4MTM5MDMzYWQiLCJpZCI6MzI2NzA5LCJpYXQiOjE3NTM4MDkwNzF9.4OOv-lxN8zvTSWRiMQnvoXVtTa6ixdOXb4Egy4g8lD0';
+    // Use Cesium's default imagery (no custom provider)
+    // Use Cesium's default imagery (should show a realistic Earth globe)
     // Fly to campus (higher altitude for context)
+    // Fly to campus at city height (e.g., 200 meters above ground)
     viewer.camera.flyTo({
-      destination: Cesium.Cartesian3.fromDegrees(center[1], center[0], 5000),
+      destination: Cesium.Cartesian3.fromDegrees(center[1], center[0], 200),
       orientation: {
         heading: Cesium.Math.toRadians(0),
         pitch: Cesium.Math.toRadians(-35),
@@ -76,7 +245,98 @@
       point: { pixelSize: 16, color: Cesium.Color.RED, outlineColor: Cesium.Color.WHITE, outlineWidth: 3 },
       label: { text: campus, font: '16px sans-serif', fillColor: Cesium.Color.WHITE, outlineColor: Cesium.Color.BLACK, outlineWidth: 2, style: Cesium.LabelStyle.FILL_AND_OUTLINE, verticalOrigin: Cesium.VerticalOrigin.BOTTOM, pixelOffset: new Cesium.Cartesian2(0, -24) }
     });
-    // Optional: Add more campus POIs/entities here
+    // Add bubbles for important buildings (professors and clubs)
+    const campusBuildings = {
+      'University of Texas at Austin': [
+        { name: "Main Building (Tower)", coords: [30.2861, -97.7394], info: "Professors: Dr. Smith, Dr. Lee<br>Clubs: Robotics, Chess" },
+        { name: "Gregory Gymnasium", coords: [30.2845, -97.7367], info: "Professors: Dr. Kim<br>Clubs: Fitness, Yoga" },
+        { name: "Perry-Castañeda Library", coords: [30.2839, -97.7354], info: "Professors: Dr. Patel<br>Clubs: Book Club, Study Group" }
+      ],
+      'Texas A&M University': [
+        { name: "Academic Building", coords: [30.6157, -96.3406], info: "Professors: Dr. Adams, Dr. Carter<br>Clubs: Aggie Coding, Math Club" },
+        { name: "Kyle Field", coords: [30.6102, -96.3417], info: "Professors: Dr. Evans<br>Clubs: Sports, Tailgating" },
+        { name: "Evans Library", coords: [30.6172, -96.3386], info: "Professors: Dr. Brooks<br>Clubs: Study Group, Book Club" }
+      ],
+      'Rice University': [
+        { name: "Lovett Hall", coords: [29.7191, -95.3985], info: "Professors: Dr. White, Dr. Green<br>Clubs: Chess, Debate" },
+        { name: "Fondren Library", coords: [29.7176, -95.3966], info: "Professors: Dr. Black<br>Clubs: Book Club, Study Group" },
+        { name: "Reckling Park", coords: [29.7161, -95.3997], info: "Professors: Dr. Blue<br>Clubs: Baseball, Sports" }
+      ],
+      'Texas Tech University': [
+        { name: "Administration Building", coords: [33.5846, -101.8784], info: "Professors: Dr. Taylor, Dr. Morgan<br>Clubs: Tech Robotics, Art Club" },
+        { name: "Jones AT&T Stadium", coords: [33.5841, -101.8747], info: "Professors: Dr. Harris<br>Clubs: Football, Sports" },
+        { name: "Library", coords: [33.5861, -101.8787], info: "Professors: Dr. Clark<br>Clubs: Study Group, Book Club" }
+      ],
+      'University of Houston': [
+        { name: "Ezekiel Cullen Building", coords: [29.7211, -95.3431], info: "Professors: Dr. Young, Dr. King<br>Clubs: Engineering, Chess" },
+        { name: "MD Anderson Library", coords: [29.7202, -95.3412], info: "Professors: Dr. Wright<br>Clubs: Book Club, Study Group" },
+        { name: "TDECU Stadium", coords: [29.7191, -95.3451], info: "Professors: Dr. Hall<br>Clubs: Sports, Tailgating" }
+      ],
+      'Southern Methodist University': [
+        { name: "Dallas Hall", coords: [32.8423, -96.7846], info: "Professors: Dr. Allen, Dr. Scott<br>Clubs: Debate, Art" },
+        { name: "Fondren Science Building", coords: [32.8431, -96.7837], info: "Professors: Dr. Baker<br>Clubs: Science, Math" },
+        { name: "Dedman Center", coords: [32.8412, -96.7852], info: "Professors: Dr. Nelson<br>Clubs: Fitness, Yoga" }
+      ],
+      'Baylor University': [
+        { name: "Pat Neff Hall", coords: [31.5493, -97.1143], info: "Professors: Dr. Reed, Dr. Cook<br>Clubs: Leadership, Chess" },
+        { name: "Moody Library", coords: [31.5485, -97.1161], info: "Professors: Dr. Bell<br>Clubs: Book Club, Study Group" },
+        { name: "McLane Stadium", coords: [31.5532, -97.1081], info: "Professors: Dr. Price<br>Clubs: Sports, Tailgating" }
+      ],
+      'University of North Texas': [
+        { name: "UNT Union", coords: [33.2101, -97.1503], info: "Professors: Dr. Foster, Dr. Murphy<br>Clubs: Music, Chess" },
+        { name: "Willis Library", coords: [33.2107, -97.1487], info: "Professors: Dr. Bailey<br>Clubs: Book Club, Study Group" },
+        { name: "Apogee Stadium", coords: [33.2075, -97.1527], info: "Professors: Dr. Cooper<br>Clubs: Sports, Tailgating" }
+      ]
+    };
+
+    if (campusBuildings[campus]) {
+      campusBuildings[campus].forEach(b => {
+        viewer.entities.add({
+          position: Cesium.Cartesian3.fromDegrees(b.coords[1], b.coords[0], 10),
+          point: { pixelSize: 12, color: Cesium.Color.BLUE, outlineColor: Cesium.Color.WHITE, outlineWidth: 2 },
+          label: {
+            text: `${b.name}\n${b.info.replace(/<br>/g, '\n')}`,
+            font: '14px sans-serif',
+            fillColor: Cesium.Color.WHITE,
+            outlineColor: Cesium.Color.BLACK,
+            outlineWidth: 2,
+            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+            verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+            pixelOffset: new Cesium.Cartesian2(0, -24)
+          }
+        });
+      });
+    }
+
+    // Add a light gray polyline border around the campus in 3D
+    const campusBorders = {
+      'University of Texas at Austin': [[30.282, -97.742], [30.288, -97.732]],
+      'Texas A&M University': [[30.612, -96.344], [30.618, -96.338]],
+      'Rice University': [[29.715, -95.401], [29.721, -95.395]],
+      'Texas Tech University': [[33.582, -101.882], [33.588, -101.874]],
+      'University of Houston': [[29.717, -95.347], [29.723, -95.339]],
+      'Southern Methodist University': [[32.840, -96.787], [32.845, -96.782]],
+      'Baylor University': [[31.547, -97.117], [31.552, -97.112]],
+      'University of North Texas': [[33.208, -97.153], [33.213, -97.148]]
+    };
+    if (campusBorders[campus]) {
+      const bounds = campusBorders[campus];
+      const borderCoords = [
+        [bounds[0][0], bounds[0][1]],
+        [bounds[0][0], bounds[1][1]],
+        [bounds[1][0], bounds[1][1]],
+        [bounds[1][0], bounds[0][1]],
+        [bounds[0][0], bounds[0][1]]
+      ];
+      viewer.entities.add({
+        polyline: {
+          positions: borderCoords.map(c => Cesium.Cartesian3.fromDegrees(c[1], c[0], 10)),
+          width: 6,
+          material: Cesium.Color.LIGHTGRAY.withAlpha(0.7),
+          clampToGround: true
+        }
+      });
+    }
   </script>
 </body>
 </html>

@@ -97,10 +97,31 @@ if (mapDiv) {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
+
+    // Disable Leaflet's default double-click zoom to use custom handler
+    map.doubleClickZoom.disable();
+
+      // Add a dot marker for the campus center, slightly above the center
+      const centerCoords = campusData[name].center;
+      const marker = L.circleMarker(centerCoords, {
+        radius: 8,
+        color: '#0074D9',
+        fillColor: '#0074D9',
+        fillOpacity: 0.9,
+        weight: 2
+      }).addTo(map);
+      marker.bindPopup(`<strong>${name}</strong>`);
     campusData[name].buildings.forEach(b => {
       const marker = L.marker(b.coords).addTo(map);
       marker.bindPopup(`<div class='bubble'><strong>${b.name}</strong><br>${b.info}</div>`);
     });
+
+    // Enable all zoom and pan controls for touchpad/touch compatibility
+    map.touchZoom.enable();
+    map.doubleClickZoom.enable();
+    map.scrollWheelZoom.enable();
+    map.boxZoom.enable();
+    map.keyboard.enable();
 
     // Add a deep red square outline for the campus
     // Define bounds for each campus (approximate)
@@ -128,7 +149,38 @@ if (mapDiv) {
         dashArray: '8',
         opacity: 0.9
       }).addTo(map);
+      // Add a light gray polyline as a border around the campus
+      const bounds = campusBounds[name];
+      const borderCoords = [
+        [bounds[0][0], bounds[0][1]],
+        [bounds[0][0], bounds[1][1]],
+        [bounds[1][0], bounds[1][1]],
+        [bounds[1][0], bounds[0][1]],
+        [bounds[0][0], bounds[0][1]]
+      ];
+      L.polyline(borderCoords, {
+        color: '#cccccc',
+        weight: 5,
+        opacity: 0.7,
+        dashArray: '2,8'
+      }).addTo(map);
     }
+
+    // Keyboard controls for zooming
+    document.addEventListener('keydown', function(e) {
+      if (!map) return;
+      if (e.key === 'ArrowUp' || e.key === '+') {
+        map.setZoom(map.getZoom() + 1);
+      } else if (e.key === 'ArrowDown' || e.key === '-') {
+        map.setZoom(map.getZoom() - 1);
+      }
+    });
+
+    // Custom double-click to zoom in (in addition to Leaflet's default)
+    map.on('dblclick', function(e) {
+      map.setZoom(map.getZoom() + 1);
+      map.panTo(e.latlng);
+    });
   } else {
     map = L.map('map').setView([31.0, -99.0], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

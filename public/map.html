@@ -18,11 +18,12 @@
   </style>
 </head>
 <body>
-  <div class="container" id="map-container" style="max-width: 100vw; width: 100vw; height: 100vh; margin: 0; padding: 0; box-shadow: none; background: none; border-radius: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+  <div class="container" id="map-container" style="max-width: 100vw; width: 100vw; height: 100vh; margin: 0; padding: 0; box-shadow: none; background: none; border-radius: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative;">
     <h1 id="map-university-name" style="margin-top: 32px;">Campus Map</h1>
     <div id="map"></div>
+    <img src="/public/ug-logo.png" alt="UniGuide Logo" style="position:absolute; bottom:16px; right:16px; width:120px; opacity:0.10; pointer-events:none; background:transparent; z-index:1000;" />
     <div style="margin-top:24px;">
-      <a id="to3dmap" class="submit-btn" style="margin-right:16px;">Switch to 3D Map</a>
+      <a id="to3dmap" class="submit-btn" style="margin-right:16px; margin-top:64px; margin-left:48px; position:relative;">Switch to 3D Map</a>
       <a id="toindex" href="/public/index.html" class="submit-btn" style="display:inline-block;">Back</a>
     </div>
   </div>
@@ -34,7 +35,7 @@
       const params = new URLSearchParams(window.location.search);
       const name = params.get('name');
       document.getElementById('to3dmap').addEventListener('click', function() {
-        window.location.href = `/public/3dmap/map3d.html?name=${encodeURIComponent(name)}`;
+        window.location.href = 'https://congenial-trout-9749gp4rrx9rh7xwq-3000.app.github.dev/public/3dmap/cesium3d.html';
       });
       // Ensure going back to index preserves the selected university (optional, can be removed if not needed)
       document.getElementById('toindex').addEventListener('click', function(e) {
