@@ -17,97 +17,73 @@ const campusData = {
   "University of Texas at Austin": {
     center: [30.285, -97.735],
     zoom: 16,
-    entrance: [30.2842, -97.7375],
     buildings: [
-      { name: "Main Building (Tower)", coords: [30.2861, -97.7394], info: "Professors: Dr. Smith, Dr. Lee<br>Clubs: Robotics, Chess<br>Description: Iconic UT Austin tower." },
-      { name: "Gregory Gymnasium", coords: [30.2845, -97.7367], info: "Professors: Dr. Kim<br>Clubs: Fitness, Yoga<br>Description: Popular gym and fitness center." },
-      { name: "Perry-Castañeda Library", coords: [30.2839, -97.7354], info: "Professors: Dr. Patel<br>Clubs: Book Club, Study Group<br>Description: Main campus library." },
-      { name: "Student Union", coords: [30.2855, -97.7362], info: "Professors: Dr. Lee<br>Clubs: Student Government, Gaming<br>Description: Hub for student activities." },
-      { name: "Engineering Building", coords: [30.2865, -97.7370], info: "Professors: Dr. Carter<br>Clubs: Robotics, Coding<br>Description: Engineering classes and labs." }
+      { name: "Main Building (Tower)", coords: [30.2861, -97.7394], info: "Professors: Dr. Smith, Dr. Lee<br>Clubs: Robotics, Chess" },
+      { name: "Gregory Gymnasium", coords: [30.2845, -97.7367], info: "Professors: Dr. Kim<br>Clubs: Fitness, Yoga" },
+      { name: "Perry-Castañeda Library", coords: [30.2839, -97.7354], info: "Professors: Dr. Patel<br>Clubs: Book Club, Study Group" }
     ]
   },
   "Texas A&M University": {
     center: [30.6152, -96.3415],
     zoom: 16,
-    entrance: [30.6135, -96.3428],
     buildings: [
-      { name: "Academic Building", coords: [30.6157, -96.3406], info: "Professors: Dr. Adams, Dr. Carter<br>Clubs: Aggie Coding, Math Club<br>Description: Historic academic building." },
-      { name: "Kyle Field", coords: [30.6102, -96.3417], info: "Professors: Dr. Evans<br>Clubs: Sports, Tailgating<br>Description: Football stadium." },
-      { name: "Evans Library", coords: [30.6172, -96.3386], info: "Professors: Dr. Brooks<br>Clubs: Study Group, Book Club<br>Description: Main campus library." },
-      { name: "Student Center", coords: [30.6145, -96.3412], info: "Professors: Dr. Carter<br>Clubs: Student Government, Gaming<br>Description: Student activities center." },
-      { name: "Engineering Complex", coords: [30.6162, -96.3420], info: "Professors: Dr. Adams<br>Clubs: Robotics, Coding<br>Description: Engineering classes and labs." }
+      { name: "Academic Building", coords: [30.6157, -96.3406], info: "Professors: Dr. Adams, Dr. Carter<br>Clubs: Aggie Coding, Math Club" },
+      { name: "Kyle Field", coords: [30.6102, -96.3417], info: "Professors: Dr. Evans<br>Clubs: Sports, Tailgating" },
+      { name: "Evans Library", coords: [30.6172, -96.3386], info: "Professors: Dr. Brooks<br>Clubs: Study Group, Book Club" }
     ]
   },
   "Rice University": {
     center: [29.7182, -95.3977],
     zoom: 16,
-    entrance: [29.7172, -95.3988],
     buildings: [
-      { name: "Lovett Hall", coords: [29.7191, -95.3985], info: "Professors: Dr. White, Dr. Green<br>Clubs: Chess, Debate<br>Description: Historic Rice entrance." },
-      { name: "Fondren Library", coords: [29.7176, -95.3966], info: "Professors: Dr. Black<br>Clubs: Book Club, Study Group<br>Description: Main campus library." },
-      { name: "Reckling Park", coords: [29.7161, -95.3997], info: "Professors: Dr. Blue<br>Clubs: Baseball, Sports<br>Description: Baseball stadium." },
-      { name: "Student Center", coords: [29.7180, -95.3970], info: "Professors: Dr. Green<br>Clubs: Student Government, Gaming<br>Description: Student activities center." },
-      { name: "Engineering Building", coords: [29.7190, -95.3960], info: "Professors: Dr. White<br>Clubs: Robotics, Coding<br>Description: Engineering classes and labs." }
+      { name: "Lovett Hall", coords: [29.7191, -95.3985], info: "Professors: Dr. White, Dr. Green<br>Clubs: Chess, Debate" },
+      { name: "Fondren Library", coords: [29.7176, -95.3966], info: "Professors: Dr. Black<br>Clubs: Book Club, Study Group" },
+      { name: "Reckling Park", coords: [29.7161, -95.3997], info: "Professors: Dr. Blue<br>Clubs: Baseball, Sports" }
     ]
   },
   "Texas Tech University": {
     center: [33.5846, -101.8784],
     zoom: 16,
-    entrance: [33.5835, -101.8795],
     buildings: [
-      { name: "Administration Building", coords: [33.5846, -101.8784], info: "Professors: Dr. Taylor, Dr. Morgan<br>Clubs: Tech Robotics, Art Club<br>Description: Main admin building." },
-      { name: "Jones AT&T Stadium", coords: [33.5841, -101.8747], info: "Professors: Dr. Harris<br>Clubs: Football, Sports<br>Description: Football stadium." },
-      { name: "Library", coords: [33.5861, -101.8787], info: "Professors: Dr. Clark<br>Clubs: Study Group, Book Club<br>Description: Main campus library." },
-      { name: "Student Union", coords: [33.5850, -101.8770], info: "Professors: Dr. Morgan<br>Clubs: Student Government, Gaming<br>Description: Student activities center." },
-      { name: "Engineering Building", coords: [33.5865, -101.8790], info: "Professors: Dr. Taylor<br>Clubs: Robotics, Coding<br>Description: Engineering classes and labs." }
+      { name: "Administration Building", coords: [33.5846, -101.8784], info: "Professors: Dr. Taylor, Dr. Morgan<br>Clubs: Tech Robotics, Art Club" },
+      { name: "Jones AT&T Stadium", coords: [33.5841, -101.8747], info: "Professors: Dr. Harris<br>Clubs: Football, Sports" },
+      { name: "Library", coords: [33.5861, -101.8787], info: "Professors: Dr. Clark<br>Clubs: Study Group, Book Club" }
     ]
   },
   "University of Houston": {
     center: [29.7199, -95.3422],
     zoom: 16,
-    entrance: [29.7185, -95.3440],
     buildings: [
-      { name: "Ezekiel Cullen Building", coords: [29.7211, -95.3431], info: "Professors: Dr. Young, Dr. King<br>Clubs: Engineering, Chess<br>Description: Main admin building." },
-      { name: "MD Anderson Library", coords: [29.7202, -95.3412], info: "Professors: Dr. Wright<br>Clubs: Book Club, Study Group<br>Description: Main campus library." },
-      { name: "TDECU Stadium", coords: [29.7191, -95.3451], info: "Professors: Dr. Hall<br>Clubs: Sports, Tailgating<br>Description: Football stadium." },
-      { name: "Student Center", coords: [29.7195, -95.3420], info: "Professors: Dr. King<br>Clubs: Student Government, Gaming<br>Description: Student activities center." },
-      { name: "Engineering Building", coords: [29.7205, -95.3435], info: "Professors: Dr. Young<br>Clubs: Robotics, Coding<br>Description: Engineering classes and labs." }
+      { name: "Ezekiel Cullen Building", coords: [29.7211, -95.3431], info: "Professors: Dr. Young, Dr. King<br>Clubs: Engineering, Chess" },
+      { name: "MD Anderson Library", coords: [29.7202, -95.3412], info: "Professors: Dr. Wright<br>Clubs: Book Club, Study Group" },
+      { name: "TDECU Stadium", coords: [29.7191, -95.3451], info: "Professors: Dr. Hall<br>Clubs: Sports, Tailgating" }
     ]
   },
   "Southern Methodist University": {
     center: [32.8423, -96.7846],
     zoom: 16,
-    entrance: [32.8408, -96.7860],
     buildings: [
-      { name: "Dallas Hall", coords: [32.8423, -96.7846], info: "Professors: Dr. Allen, Dr. Scott<br>Clubs: Debate, Art<br>Description: Historic main building." },
-      { name: "Fondren Science Building", coords: [32.8431, -96.7837], info: "Professors: Dr. Baker<br>Clubs: Science, Math<br>Description: Science classes and labs." },
-      { name: "Dedman Center", coords: [32.8412, -96.7852], info: "Professors: Dr. Nelson<br>Clubs: Fitness, Yoga<br>Description: Fitness and recreation center." },
-      { name: "Student Center", coords: [32.8420, -96.7840], info: "Professors: Dr. Scott<br>Clubs: Student Government, Gaming<br>Description: Student activities center." },
-      { name: "Engineering Building", coords: [32.8435, -96.7850], info: "Professors: Dr. Allen<br>Clubs: Robotics, Coding<br>Description: Engineering classes and labs." }
+      { name: "Dallas Hall", coords: [32.8423, -96.7846], info: "Professors: Dr. Allen, Dr. Scott<br>Clubs: Debate, Art" },
+      { name: "Fondren Science Building", coords: [32.8431, -96.7837], info: "Professors: Dr. Baker<br>Clubs: Science, Math" },
+      { name: "Dedman Center", coords: [32.8412, -96.7852], info: "Professors: Dr. Nelson<br>Clubs: Fitness, Yoga" }
     ]
   },
   "Baylor University": {
     center: [31.5493, -97.1143],
     zoom: 16,
-    entrance: [31.5478, -97.1155],
     buildings: [
-      { name: "Pat Neff Hall", coords: [31.5493, -97.1143], info: "Professors: Dr. Reed, Dr. Cook<br>Clubs: Leadership, Chess<br>Description: Main admin building." },
-      { name: "Moody Library", coords: [31.5485, -97.1161], info: "Professors: Dr. Bell<br>Clubs: Book Club, Study Group<br>Description: Main campus library." },
-      { name: "McLane Stadium", coords: [31.5532, -97.1081], info: "Professors: Dr. Price<br>Clubs: Sports, Tailgating<br>Description: Football stadium." },
-      { name: "Student Center", coords: [31.5488, -97.1140], info: "Professors: Dr. Cook<br>Clubs: Student Government, Gaming<br>Description: Student activities center." },
-      { name: "Engineering Building", coords: [31.5498, -97.1150], info: "Professors: Dr. Reed<br>Clubs: Robotics, Coding<br>Description: Engineering classes and labs." }
+      { name: "Pat Neff Hall", coords: [31.5493, -97.1143], info: "Professors: Dr. Reed, Dr. Cook<br>Clubs: Leadership, Chess" },
+      { name: "Moody Library", coords: [31.5485, -97.1161], info: "Professors: Dr. Bell<br>Clubs: Book Club, Study Group" },
+      { name: "McLane Stadium", coords: [31.5532, -97.1081], info: "Professors: Dr. Price<br>Clubs: Sports, Tailgating" }
     ]
   },
   "University of North Texas": {
     center: [33.2101, -97.1503],
     zoom: 16,
-    entrance: [33.2088, -97.1515],
     buildings: [
-      { name: "UNT Union", coords: [33.2101, -97.1503], info: "Professors: Dr. Foster, Dr. Murphy<br>Clubs: Music, Chess<br>Description: Student union building." },
-      { name: "Willis Library", coords: [33.2107, -97.1487], info: "Professors: Dr. Bailey<br>Clubs: Book Club, Study Group<br>Description: Main campus library." },
-      { name: "Apogee Stadium", coords: [33.2075, -97.1527], info: "Professors: Dr. Cooper<br>Clubs: Sports, Tailgating<br>Description: Football stadium." },
-      { name: "Student Center", coords: [33.2095, -97.1495], info: "Professors: Dr. Murphy<br>Clubs: Student Government, Gaming<br>Description: Student activities center." },
-      { name: "Engineering Building", coords: [33.2110, -97.1500], info: "Professors: Dr. Foster<br>Clubs: Robotics, Coding<br>Description: Engineering classes and labs." }
+      { name: "UNT Union", coords: [33.2101, -97.1503], info: "Professors: Dr. Foster, Dr. Murphy<br>Clubs: Music, Chess" },
+      { name: "Willis Library", coords: [33.2107, -97.1487], info: "Professors: Dr. Bailey<br>Clubs: Book Club, Study Group" },
+      { name: "Apogee Stadium", coords: [33.2075, -97.1527], info: "Professors: Dr. Cooper<br>Clubs: Sports, Tailgating" }
     ]
   }
 };
@@ -116,7 +92,6 @@ const campusData = {
 const mapDiv = document.getElementById('map');
 if (mapDiv) {
   let map;
-  let routeLine;
   if (campusData[name]) {
     map = L.map('map').setView(campusData[name].center, campusData[name].zoom);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -126,33 +101,19 @@ if (mapDiv) {
     // Disable Leaflet's default double-click zoom to use custom handler
     map.doubleClickZoom.disable();
 
-    // Add "You are here" marker at campus entrance
-    const entranceCoords = campusData[name].entrance;
-    const entranceMarker = L.marker(entranceCoords, {
-      icon: L.icon({
-        iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-        iconSize: [32, 32],
-        iconAnchor: [16, 32],
-        popupAnchor: [0, -32]
-      })
-    }).addTo(map);
-    entranceMarker.bindPopup(`<strong>You are here (Campus Entrance)</strong>`).openPopup();
-
-    // Add building markers and popups
+      // Add a dot marker for the campus center, slightly above the center
+      const centerCoords = campusData[name].center;
+      const marker = L.circleMarker(centerCoords, {
+        radius: 8,
+        color: '#0074D9',
+        fillColor: '#0074D9',
+        fillOpacity: 0.9,
+        weight: 2
+      }).addTo(map);
+      marker.bindPopup(`<strong>${name}</strong>`);
     campusData[name].buildings.forEach(b => {
       const marker = L.marker(b.coords).addTo(map);
       marker.bindPopup(`<div class='bubble'><strong>${b.name}</strong><br>${b.info}</div>`);
-      marker.on('click', function() {
-        if (routeLine) {
-          map.removeLayer(routeLine);
-        }
-        routeLine = L.polyline([entranceCoords, b.coords], {
-          color: '#43ea7f',
-          weight: 5,
-          opacity: 0.8,
-          dashArray: '10,10'
-        }).addTo(map);
-      });
     });
 
     // Enable all zoom and pan controls for touchpad/touch compatibility
