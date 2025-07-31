@@ -6,6 +6,33 @@ body {
   padding: 0;
 }
 
+.dark-mode {
+  background: #181a1b !important;
+  color: #e0e7ef !important;
+}
+
+.dark-mode .container {
+  background: #23272a !important;
+  color: #e0e7ef !important;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.40);
+}
+
+.dark-mode h1, .dark-mode h2, .dark-mode label {
+  color: #e0e7ef !important;
+}
+
+.dark-mode select, .dark-mode input, .dark-mode textarea {
+  background: #23272a !important;
+  color: #e0e7ef !important;
+  border: 1.5px solid #444 !important;
+}
+
+.dark-mode .submit-btn {
+  background: #444 !important;
+  color: #e0e7ef !important;
+}
+}
+
 
 .container {
   max-width: 520px;
@@ -14,7 +41,9 @@ body {
   border-radius: 20px;
   box-shadow: 0 6px 32px rgba(0,0,0,0.10);
   padding: 40px 32px;
-  text-align: center;
+  text-align: left;
+  position: relative;
+  left: 0;
 }
 
 
@@ -30,6 +59,51 @@ h1 {
 .select-wrapper {
   position: relative;
   margin-bottom: 32px;
+  text-align: left;
+}
+
+select, #searchBar {
+  width: 340px;
+  min-width: 220px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+}
+
+#searchBar {
+  font-size: 1em;
+}
+
+#filterOptions label {
+  font-size: 1em;
+  margin-right: 12px;
+}
+
+#favoritesList {
+  margin-top: 16px;
+  font-size: 1em;
+}
+
+#feedbackForm {
+  margin-top: 32px;
+  background: rgba(67,234,127,0.05);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+#feedbackForm h2 {
+  margin-top: 0;
+}
+
+#feedbackText {
+  font-size: 1em;
+  margin-bottom: 8px;
+}
+
+#feedbackMsg {
+  font-size: 1em;
+  color: #43ea7f;
+}
 }
 
 

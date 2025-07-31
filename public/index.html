@@ -7,21 +7,36 @@
   <link rel="stylesheet" href="/public/style.css">
 </head>
 <body>
-  <div class="map-key" styl
-  e="position: absolute; top: 24px; right: 32px; z-index: 10;">
-    <span style="color: #43ea7f; font-size: 1.2em; font-weight: bold;">&#x2BC8;</span> Campus map available (2D & 3D)<br>
-    <span style="color: #e11528; font-size: 1.2em; font-weight: bold;">*</span> Campus map not available<br>
-    <span style="color: #0078d7; font-size: 1.2em; font-weight: bold;">&#x25A0;</span> More universities/colleges coming soon
+
+  <div style="position: absolute; top: 24px; right: 32px; z-index: 10; display: flex; align-items: center; gap: 32px;">
+    <div class="map-key">
+      <span style="color: #43ea7f; font-size: 1.2em; font-weight: bold;">&#x2BC8;</span> Campus map available (2D & 3D)<br>
+      <span style="color: #e11528; font-size: 1.2em; font-weight: bold;">*</span> Campus map not available<br>
+      <span style="color: #0078d7; font-size: 1.2em; font-weight: bold;">&#x25A0;</span> More universities/colleges coming soon
+    </div>
+    <button id="darkModeToggle" class="submit-btn" style="margin-left:16px;">🌙 Dark Mode</button>
   </div>
   <div class="container" id="main-container">
     <h1>Select Your Texas College or University</h1>
     <form id="collegeForm">
+      <input type="text" id="searchBar" placeholder="Search universities..." style="width:100%;margin-bottom:16px;padding:10px;border-radius:8px;border:1px solid #bfc9d6;" aria-label="Search universities">
       <div class="select-wrapper">
-        <select id="universitySelect" required>
+        <select id="universitySelect" required aria-label="Select university">
           <option value="" disabled selected>Select a university...</option>
         </select>
       </div>
+      <div id="filterOptions" style="margin-bottom:16px;text-align:left;">
+        <label><input type="checkbox" id="filterMapAvailable"> Campus Map Available</label>
+        <label style="margin-left:16px;"><input type="checkbox" id="filterFavorites"> Favorites Only</label>
+      </div>
       <button type="submit" class="submit-btn">Submit</button>
+    </form>
+    <div id="favoritesList" style="margin-top:24px;text-align:left;"></div>
+    <form id="feedbackForm" style="margin-top:32px;text-align:left;">
+      <h2>Feedback</h2>
+      <textarea id="feedbackText" rows="3" style="width:100%;border-radius:8px;padding:8px;" placeholder="Your feedback..."></textarea>
+      <button type="submit" class="submit-btn" style="margin-top:8px;">Send Feedback</button>
+      <div id="feedbackMsg" style="margin-top:8px;color:#43ea7f;"></div>
     </form>
   </div>
   <script src="/public/app.js"></script>
